@@ -33,7 +33,7 @@ public final class ItemObject {
 		return itemLocation;
 	}
 
-	public String resourceLocation() {
+	public String itemLocation() {
 		return itemLocation;
 	}
 

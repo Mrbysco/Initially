@@ -34,21 +34,23 @@ public class InitialHandler {
 
 	public static void giveInitially(Player player) {
 		for(ItemObject object : itemList) {
-			Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(object.resourceLocation()));
-			if(item != null) {
-				ItemStack stack = new ItemStack(item);
-				CompoundTag tag = null;
-				if(!object.tag().isEmpty()) {
-					try {
-						tag = TagParser.parseTag(object.tag());
-					} catch(Exception e) {
-						Initially.LOGGER.trace(e);
+			if(!object.itemLocation().isEmpty()) {
+				Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(object.itemLocation()));
+				if(item != null) {
+					ItemStack stack = new ItemStack(item, object.count());
+					CompoundTag tag = null;
+					if(!object.tag().isEmpty()) {
+						try {
+							tag = TagParser.parseTag(object.tag());
+						} catch(Exception e) {
+							Initially.LOGGER.trace(e);
+						}
 					}
+					if(tag != null) {
+						stack.setTag(tag);
+					}
+					player.getInventory().setItem(object.slot(), stack);
 				}
-				if(tag != null) {
-					stack.setTag(tag);
-				}
-				player.getInventory().setItem(object.slot(), stack);
 			}
 		}
 	}
