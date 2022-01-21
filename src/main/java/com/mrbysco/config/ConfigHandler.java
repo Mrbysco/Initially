@@ -19,7 +19,7 @@ public class ConfigHandler {
 	public static final File INITIAL_FOLDER = new File(FMLPaths.CONFIGDIR.get().toFile() + "/initially");
 	public static final File INITIAL_FILE = new File(INITIAL_FOLDER,  "Initially.json");
 
-	public static void loadInitialConfig() {
+	public static void initializeConfig() {
 		if (!INITIAL_FOLDER.exists() || !INITIAL_FILE.exists()) {
 			INITIAL_FOLDER.mkdirs();
 
@@ -43,7 +43,9 @@ public class ConfigHandler {
 				e.printStackTrace();
 			}
 		}
+	}
 
+	public static void loadInitialConfig() {
 		InitialHandler.itemList.clear();
 		String fileName = INITIAL_FILE.getName();
 		try (FileReader json = new FileReader(INITIAL_FILE)) {
