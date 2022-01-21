@@ -24,14 +24,14 @@ public class ConfigHandler {
 			INITIAL_FOLDER.mkdirs();
 
 			List<ItemObject> items = new ArrayList<>(41);
-			items.add(new ItemObject(40, "offhand", "", 1));
-			items.add(new ItemObject(39, "head", "", 1));
-			items.add(new ItemObject(38, "chest", "", 1));
-			items.add(new ItemObject(37, "legs", "", 1));
-			items.add(new ItemObject(36, "feet", "", 1));
+			items.add(new ItemObject(40, "offhand", "", "", 1));
+			items.add(new ItemObject(39, "head", "", "", 1));
+			items.add(new ItemObject(38, "chest", "", "", 1));
+			items.add(new ItemObject(37, "legs", "", "", 1));
+			items.add(new ItemObject(36, "feet", "", "", 1));
 			for(int i = 0; i < 36; i++) {
 				switch(i) {
-					default -> items.add(new ItemObject(i, null, "", 1));
+					default -> items.add(new ItemObject(i, "", "", 1));
 				}
 			}
 
