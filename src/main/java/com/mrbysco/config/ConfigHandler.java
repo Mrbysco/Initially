@@ -17,7 +17,7 @@ import java.util.List;
 public class ConfigHandler {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	public static final File INITIAL_FOLDER = new File(FMLPaths.CONFIGDIR.get().toFile() + "/initially");
-	public static final File INITIAL_FILE = new File(INITIAL_FOLDER,  "Initially.json");
+	public static final File INITIAL_FILE = new File(INITIAL_FOLDER, "Initially.json");
 
 	public static void initializeConfig() {
 		if (!INITIAL_FOLDER.exists() || !INITIAL_FILE.exists()) {
@@ -29,14 +29,14 @@ public class ConfigHandler {
 			items.add(new ItemObject(38, "chest", "", "", 1));
 			items.add(new ItemObject(37, "legs", "", "", 1));
 			items.add(new ItemObject(36, "feet", "", "", 1));
-			for(int i = 0; i < 36; i++) {
-				switch(i) {
+			for (int i = 0; i < 36; i++) {
+				switch (i) {
 					default -> items.add(new ItemObject(i, "", "", 1));
 				}
 			}
 
 			InitialConfig initialConfig = new InitialConfig(items);
-			try(FileWriter writer = new FileWriter(INITIAL_FILE)) {
+			try (FileWriter writer = new FileWriter(INITIAL_FILE)) {
 				GSON.toJson(initialConfig, writer);
 				writer.flush();
 			} catch (IOException e) {

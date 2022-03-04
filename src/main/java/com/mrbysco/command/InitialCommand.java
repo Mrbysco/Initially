@@ -14,7 +14,7 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 
 public class InitialCommand {
-	public static void initializeCommands (CommandDispatcher<CommandSourceStack> dispatcher) {
+	public static void initializeCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
 		final LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("initially");
 		root.requires((p_198721_0_) -> p_198721_0_.hasPermission(2))
 				.then(Commands.literal("give").then(Commands.argument("player", EntityArgument.players()).executes(InitialCommand::giveInitial)));
@@ -22,7 +22,7 @@ public class InitialCommand {
 	}
 
 	private static int giveInitial(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
-		for(ServerPlayer player : EntityArgument.getPlayers(ctx, "player")) {
+		for (ServerPlayer player : EntityArgument.getPlayers(ctx, "player")) {
 			InitialHandler.giveInitially(player);
 			MutableComponent text = new TranslatableComponent("commands.initially.give.success", player.getName().getContents()).withStyle(ChatFormatting.GOLD);
 			ctx.getSource().sendSuccess(text, false);

@@ -23,9 +23,9 @@ public class InitialHandler {
 	public void firstJoin(PlayerLoggedInEvent event) {
 		Player player = event.getPlayer();
 
-		if(!player.level.isClientSide) {
+		if (!player.level.isClientSide) {
 			CompoundTag playerData = player.getPersistentData();
-			if(!playerData.getBoolean(initialGiven)) {
+			if (!playerData.getBoolean(initialGiven)) {
 				giveInitially(player);
 				playerData.putBoolean(initialGiven, true);
 			}
@@ -33,20 +33,20 @@ public class InitialHandler {
 	}
 
 	public static void giveInitially(Player player) {
-		for(ItemObject object : itemList) {
-			if(!object.itemLocation().isEmpty()) {
+		for (ItemObject object : itemList) {
+			if (!object.itemLocation().isEmpty()) {
 				Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(object.itemLocation()));
-				if(item != null) {
+				if (item != null) {
 					ItemStack stack = new ItemStack(item, object.count());
 					CompoundTag tag = null;
-					if(!object.tag().isEmpty()) {
+					if (!object.tag().isEmpty()) {
 						try {
 							tag = TagParser.parseTag(object.tag());
-						} catch(Exception e) {
+						} catch (Exception e) {
 							Initially.LOGGER.trace(e);
 						}
 					}
-					if(tag != null) {
+					if (tag != null) {
 						stack.setTag(tag);
 					}
 					player.getInventory().setItem(object.slot(), stack);

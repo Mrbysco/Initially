@@ -15,23 +15,23 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(Initially.MOD_ID)
 public class Initially {
-    public static final String MOD_ID = "initially";
-    public static final Logger LOGGER = LogManager.getLogger();
+	public static final String MOD_ID = "initially";
+	public static final Logger LOGGER = LogManager.getLogger();
 
-    public Initially() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        eventBus.addListener(this::loadComplete);
+	public Initially() {
+		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+		eventBus.addListener(this::loadComplete);
 
-        MinecraftForge.EVENT_BUS.register(new InitialHandler());
-        MinecraftForge.EVENT_BUS.register(new ConfigReloadManager());
-        MinecraftForge.EVENT_BUS.addListener(this::onCommandRegister);
-    }
+		MinecraftForge.EVENT_BUS.register(new InitialHandler());
+		MinecraftForge.EVENT_BUS.register(new ConfigReloadManager());
+		MinecraftForge.EVENT_BUS.addListener(this::onCommandRegister);
+	}
 
-    public void onCommandRegister(RegisterCommandsEvent event) {
-        InitialCommand.initializeCommands(event.getDispatcher());
-    }
+	public void onCommandRegister(RegisterCommandsEvent event) {
+		InitialCommand.initializeCommands(event.getDispatcher());
+	}
 
-    private void loadComplete(final FMLLoadCompleteEvent event) {
-        ConfigHandler.initializeConfig();
-    }
+	private void loadComplete(final FMLLoadCompleteEvent event) {
+		ConfigHandler.initializeConfig();
+	}
 }
