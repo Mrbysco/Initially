@@ -1,9 +1,9 @@
 package com.mrbysco.initially;
 
-import com.mrbysco.command.InitialCommand;
-import com.mrbysco.config.ConfigHandler;
-import com.mrbysco.config.ConfigReloadManager;
-import com.mrbysco.handler.InitialHandler;
+import com.mrbysco.initially.command.InitialCommand;
+import com.mrbysco.initially.config.ConfigHandler;
+import com.mrbysco.initially.config.ConfigReloadManager;
+import com.mrbysco.initially.handler.InitialHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;

@@ -1,7 +1,8 @@
-package com.mrbysco.handler;
+package com.mrbysco.initially.handler;
 
-import com.mrbysco.config.object.ItemObject;
 import com.mrbysco.initially.Initially;
+import com.mrbysco.initially.config.object.ItemObject;
+import com.mrbysco.initially.util.InitialData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.resources.ResourceLocation;
@@ -25,9 +26,17 @@ public class InitialHandler {
 
 		if (!player.level.isClientSide) {
 			CompoundTag playerData = player.getPersistentData();
-			if (!playerData.getBoolean(initialGiven)) {
+			InitialData initialData = InitialData.get(player.level);
+			if (playerData.getBoolean(initialGiven)) {
+				initialData.setGiven(player.getUUID());
+				initialData.setDirty();
+				playerData.remove(initialGiven);
+			}
+
+			if (!initialData.hasBeenGiven(player.getUUID())) {
 				giveInitially(player);
-				playerData.putBoolean(initialGiven, true);
+				initialData.setGiven(player.getUUID());
+				initialData.setDirty();
 			}
 		}
 	}

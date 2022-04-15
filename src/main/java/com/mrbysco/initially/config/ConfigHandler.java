@@ -1,9 +1,9 @@
-package com.mrbysco.config;
+package com.mrbysco.initially.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mrbysco.config.object.ItemObject;
-import com.mrbysco.handler.InitialHandler;
+import com.mrbysco.initially.config.object.ItemObject;
+import com.mrbysco.initially.handler.InitialHandler;
 import com.mrbysco.initially.Initially;
 import net.minecraftforge.fml.loading.FMLPaths;
 

@@ -1,6 +1,6 @@
-package com.mrbysco.config;
+package com.mrbysco.initially.config;
 
-import com.mrbysco.config.object.ItemObject;
+import com.mrbysco.initially.config.object.ItemObject;
 
 import java.util.List;
 import java.util.Objects;

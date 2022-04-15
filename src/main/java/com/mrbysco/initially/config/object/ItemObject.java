@@ -1,4 +1,4 @@
-package com.mrbysco.config.object;
+package com.mrbysco.initially.config.object;
 
 import java.util.Objects;
 

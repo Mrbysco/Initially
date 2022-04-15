@@ -1,4 +1,4 @@
-package com.mrbysco.config;
+package com.mrbysco.initially.config;
 
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
