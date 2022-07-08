@@ -9,8 +9,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 
 public class InitialCommand {
@@ -24,7 +24,7 @@ public class InitialCommand {
 	private static int giveInitial(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
 		for (ServerPlayer player : EntityArgument.getPlayers(ctx, "player")) {
 			InitialHandler.giveInitially(player);
-			MutableComponent text = new TranslatableComponent("commands.initially.give.success", player.getName().getContents()).withStyle(ChatFormatting.GOLD);
+			MutableComponent text = Component.translatable("commands.initially.give.success", player.getName().getContents()).withStyle(ChatFormatting.GOLD);
 			ctx.getSource().sendSuccess(text, false);
 		}
 
