@@ -22,8 +22,7 @@ public class InitialHandler {
 
 	@SubscribeEvent
 	public void firstJoin(PlayerLoggedInEvent event) {
-		Player player = event.getPlayer();
-
+		final Player player = event.getEntity();
 		if (!player.level.isClientSide) {
 			CompoundTag playerData = player.getPersistentData();
 			InitialData initialData = InitialData.get(player.level);
