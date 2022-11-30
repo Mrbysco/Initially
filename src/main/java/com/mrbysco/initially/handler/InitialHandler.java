@@ -6,6 +6,8 @@ import com.mrbysco.initially.util.InitialData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -45,6 +47,8 @@ public class InitialHandler {
 			if (!object.itemLocation().isEmpty()) {
 				Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(object.itemLocation()));
 				if (item != null) {
+					Inventory inventory = player.getInventory();
+					int slot = object.slot();
 					ItemStack stack = new ItemStack(item, object.count());
 					CompoundTag tag = null;
 					if (!object.tag().isEmpty()) {
@@ -57,7 +61,14 @@ public class InitialHandler {
 					if (tag != null) {
 						stack.setTag(tag);
 					}
-					player.getInventory().setItem(object.slot(), stack);
+					if (inventory.getItem(slot).isEmpty()) {
+						inventory.setItem(slot, stack);
+					} else {
+						if (!player.addItem(stack)) {
+							ItemEntity itemEntity = new ItemEntity(player.level, player.getX(), player.getY(), player.getZ(), stack);
+							player.level.addFreshEntity(itemEntity);
+						}
+					}
 				}
 			}
 		}
