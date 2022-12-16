@@ -30,9 +30,7 @@ public class ConfigHandler {
 			items.add(new ItemObject(37, "legs", "", "", 1));
 			items.add(new ItemObject(36, "feet", "", "", 1));
 			for (int i = 0; i < 36; i++) {
-				switch (i) {
-					default -> items.add(new ItemObject(i, "", "", 1));
-				}
+				items.add(new ItemObject(i, "", "", 1));
 			}
 
 			InitialConfig initialConfig = new InitialConfig(items);
