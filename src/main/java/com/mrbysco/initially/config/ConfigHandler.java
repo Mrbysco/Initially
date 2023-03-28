@@ -2,9 +2,9 @@ package com.mrbysco.initially.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mrbysco.initially.Initially;
 import com.mrbysco.initially.config.object.ItemObject;
 import com.mrbysco.initially.handler.InitialHandler;
-import com.mrbysco.initially.Initially;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.File;
@@ -30,9 +30,7 @@ public class ConfigHandler {
 			items.add(new ItemObject(37, "legs", "", "", 1));
 			items.add(new ItemObject(36, "feet", "", "", 1));
 			for (int i = 0; i < 36; i++) {
-				switch (i) {
-					default -> items.add(new ItemObject(i, "", "", 1));
-				}
+				items.add(new ItemObject(i, "", "", 1));
 			}
 
 			InitialConfig initialConfig = new InitialConfig(items);
