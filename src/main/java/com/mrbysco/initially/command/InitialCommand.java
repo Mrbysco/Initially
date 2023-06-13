@@ -25,7 +25,7 @@ public class InitialCommand {
 		for (ServerPlayer player : EntityArgument.getPlayers(ctx, "player")) {
 			InitialHandler.giveInitially(player);
 			MutableComponent text = Component.translatable("commands.initially.give.success", player.getName().getContents()).withStyle(ChatFormatting.GOLD);
-			ctx.getSource().sendSuccess(text, false);
+			ctx.getSource().sendSuccess(() -> text, false);
 		}
 
 		return 0;

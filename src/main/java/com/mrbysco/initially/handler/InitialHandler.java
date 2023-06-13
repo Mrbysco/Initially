@@ -25,9 +25,9 @@ public class InitialHandler {
 	@SubscribeEvent
 	public void firstJoin(PlayerLoggedInEvent event) {
 		final Player player = event.getEntity();
-		if (!player.level.isClientSide) {
+		if (!player.level().isClientSide) {
 			CompoundTag playerData = player.getPersistentData();
-			InitialData initialData = InitialData.get(player.level);
+			InitialData initialData = InitialData.get(player.level());
 			if (playerData.getBoolean(initialGiven)) {
 				initialData.setGiven(player.getUUID());
 				initialData.setDirty();
@@ -65,8 +65,8 @@ public class InitialHandler {
 						inventory.setItem(slot, stack);
 					} else {
 						if (!player.addItem(stack)) {
-							ItemEntity itemEntity = new ItemEntity(player.level, player.getX(), player.getY(), player.getZ(), stack);
-							player.level.addFreshEntity(itemEntity);
+							ItemEntity itemEntity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), stack);
+							player.level().addFreshEntity(itemEntity);
 						}
 					}
 				}

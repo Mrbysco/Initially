@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[45,)"
+loaderVersion="[46,)"
 issueTrackerURL="https://github.com/Mrbysco/Initially/issues"
 license="MIT"
 
@@ -15,12 +15,6 @@ Initializes your inventory with items specified in the config.
 [[dependencies.initially]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.19.3,1.20)"
-ordering="NONE"
-side="BOTH"
-[[dependencies.initially]]
-modId="forge"
-mandatory=true
-versionRange="[44.1.0,)"
+versionRange="[1.20,1.21)"
 ordering="NONE"
 side="BOTH"
