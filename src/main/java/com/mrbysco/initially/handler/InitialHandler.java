@@ -3,6 +3,7 @@ package com.mrbysco.initially.handler;
 import com.mrbysco.initially.Initially;
 import com.mrbysco.initially.config.object.ItemObject;
 import com.mrbysco.initially.util.InitialData;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.resources.ResourceLocation;
@@ -11,9 +12,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public class InitialHandler {
 	public static void giveInitially(Player player) {
 		for (ItemObject object : itemList) {
 			if (!object.itemLocation().isEmpty()) {
-				Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(object.itemLocation()));
+				Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(object.itemLocation()));
 				if (item != null) {
 					Inventory inventory = player.getInventory();
 					int slot = object.slot();

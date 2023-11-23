@@ -64,7 +64,7 @@ public class InitialData extends SavedData {
 		ServerLevel overworld = level.getServer().getLevel(Level.OVERWORLD);
 
 		DimensionDataStorage storage = overworld.getDataStorage();
-		return storage.computeIfAbsent(InitialData::load, InitialData::new, DATA_NAME);
+		return storage.computeIfAbsent(new SavedData.Factory<>(InitialData::new, InitialData::load), DATA_NAME);
 	}
 
 	public record SpawnerInfo(Integer spawnCount, boolean playerPlaced) {

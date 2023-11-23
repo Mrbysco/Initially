@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.mrbysco.initially.Initially;
 import com.mrbysco.initially.config.object.ItemObject;
 import com.mrbysco.initially.handler.InitialHandler;
-import net.minecraftforge.fml.loading.FMLPaths;
+import net.neoforged.fml.loading.FMLPaths;
 
 import java.io.File;
 import java.io.FileReader;
