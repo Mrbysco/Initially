@@ -1,22 +1,22 @@
 package com.mrbysco.initially;
 
+import com.mojang.logging.LogUtils;
 import com.mrbysco.initially.command.InitialCommand;
 import com.mrbysco.initially.config.ConfigHandler;
 import com.mrbysco.initially.config.ConfigReloadManager;
 import com.mrbysco.initially.handler.InitialHandler;
-import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.common.NeoForge;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import org.slf4j.Logger;
 
 @Mod(Initially.MOD_ID)
 public class Initially {
 	public static final String MOD_ID = "initially";
-	public static final Logger LOGGER = LogManager.getLogger();
+	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public Initially() {
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
