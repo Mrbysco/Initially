@@ -38,7 +38,7 @@ public class ConfigHandler {
 				GSON.toJson(initialConfig, writer);
 				writer.flush();
 			} catch (IOException e) {
-				e.printStackTrace();
+				Initially.LOGGER.trace("Failed to save config", e);
 			}
 		}
 	}

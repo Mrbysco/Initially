@@ -66,7 +66,4 @@ public class InitialData extends SavedData {
 		DimensionDataStorage storage = overworld.getDataStorage();
 		return storage.computeIfAbsent(new SavedData.Factory<>(InitialData::new, InitialData::load), DATA_NAME);
 	}
-
-	public record SpawnerInfo(Integer spawnCount, boolean playerPlaced) {
-	}
 }
