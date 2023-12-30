@@ -55,7 +55,7 @@ public class ConfigHandler {
 			}
 		} catch (final Exception e) {
 			Initially.LOGGER.error("Unable to load file {}. Please make sure it's a valid json.", fileName);
-			Initially.LOGGER.catching(e);
+			Initially.LOGGER.trace("Exception: ", e);
 		}
 	}
 }
