@@ -55,7 +55,7 @@ public class InitialHandler {
 						try {
 							tag = TagParser.parseTag(object.tag());
 						} catch (Exception e) {
-							Initially.LOGGER.trace(e);
+							Initially.LOGGER.trace("Exception: ", e);
 						}
 					}
 					if (tag != null) {
