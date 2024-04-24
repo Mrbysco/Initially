@@ -1,6 +1,7 @@
 package com.mrbysco.initially.util;
 
 import com.mrbysco.initially.Initially;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerLevel;
@@ -33,7 +34,7 @@ public class InitialData extends SavedData {
 		this.playerList.add(uuid);
 	}
 
-	public static InitialData load(CompoundTag compound) {
+	public static InitialData load(CompoundTag compound, HolderLookup.Provider provider) {
 		ListTag listTag = compound.getList("UUIDList", CompoundTag.TAG_COMPOUND);
 		List<UUID> uuidList = new ArrayList<>();
 		for (int i = 0; i < listTag.size(); ++i) {
@@ -45,7 +46,7 @@ public class InitialData extends SavedData {
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag compound) {
+	public CompoundTag save(CompoundTag compound, HolderLookup.Provider provider) {
 		ListTag listTag = new ListTag();
 		for (UUID uuid : playerList) {
 			CompoundTag uuidTag = new CompoundTag();

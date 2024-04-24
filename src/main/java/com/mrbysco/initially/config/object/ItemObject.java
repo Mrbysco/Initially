@@ -6,14 +6,14 @@ public final class ItemObject {
 	private final int slot;
 	private final String slotName;
 	private final String itemLocation;
-	private final String tag;
+	private final String components;
 	private final int count;
 
 	public ItemObject(int slot, String slotName, String resourceLocation, String tag, int count) {
 		this.slot = slot;
 		this.slotName = slotName;
 		this.itemLocation = resourceLocation;
-		this.tag = tag;
+		this.components = tag;
 		this.count = count;
 	}
 
@@ -21,7 +21,7 @@ public final class ItemObject {
 		this.slot = slot;
 		this.slotName = null;
 		this.itemLocation = resourceLocation;
-		this.tag = tag;
+		this.components = tag;
 		this.count = count;
 	}
 
@@ -37,8 +37,8 @@ public final class ItemObject {
 		return itemLocation;
 	}
 
-	public String tag() {
-		return tag;
+	public String components() {
+		return components;
 	}
 
 	public int count() {
@@ -52,13 +52,13 @@ public final class ItemObject {
 		var that = (ItemObject) obj;
 		return this.slot == that.slot &&
 				Objects.equals(this.itemLocation, that.itemLocation) &&
-				Objects.equals(this.tag, that.tag) &&
+				Objects.equals(this.components, that.components) &&
 				this.count == that.count;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(slot, itemLocation, tag, count);
+		return Objects.hash(slot, itemLocation, components, count);
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public final class ItemObject {
 		return "ItemObject[" +
 				"slot=" + slot + ", " +
 				"resourceLocation=" + itemLocation + ", " +
-				"tag=" + tag + ", " +
+				"components=" + components + ", " +
 				"count=" + count + ']';
 	}
 }
