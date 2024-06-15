@@ -46,7 +46,9 @@ public class InitialHandler {
 	public static void giveInitially(Player player) {
 		for (ItemObject object : itemList) {
 			if (!object.itemLocation().isEmpty()) {
-				Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(object.itemLocation()));
+				ResourceLocation location = ResourceLocation.tryParse(object.itemLocation());
+				if (location == null) continue;
+				Item item = BuiltInRegistries.ITEM.get(location);
 				if (item != null) {
 					Inventory inventory = player.getInventory();
 					int slot = object.slot();
