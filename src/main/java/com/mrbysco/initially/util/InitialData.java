@@ -1,12 +1,14 @@
 package com.mrbysco.initially.util;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.mrbysco.initially.Initially;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraft.world.level.saveddata.SavedDataType;
 import net.minecraft.world.level.storage.DimensionDataStorage;
 
 import java.util.ArrayList;
@@ -15,15 +17,25 @@ import java.util.UUID;
 
 public class InitialData extends SavedData {
 	private static final String DATA_NAME = Initially.MOD_ID + "_world_data";
-	private final List<UUID> playerList = new ArrayList<>();
+	public static final Codec<InitialData> CODEC = RecordCodecBuilder.create(
+			instance -> instance.group(
+							UUIDUtil.CODEC.listOf().fieldOf("UUIDList").forGetter(data -> data.playerList)
+					)
+					.apply(instance, InitialData::new)
+	);
+	private final List<UUID> playerList;
 
 	public InitialData(List<UUID> playerList) {
-		this.playerList.clear();
-		this.playerList.addAll(playerList);
+		this.playerList = playerList;
+		this.setDirty();
 	}
 
-	public InitialData() {
+	private InitialData() {
 		this(new ArrayList<>());
+	}
+
+	public static SavedDataType<InitialData> type() {
+		return new SavedDataType<>(DATA_NAME, InitialData::new, CODEC, DataFixTypes.SAVED_DATA_COMMAND_STORAGE);
 	}
 
 	public boolean hasBeenGiven(UUID uuid) {
@@ -34,30 +46,6 @@ public class InitialData extends SavedData {
 		this.playerList.add(uuid);
 	}
 
-	public static InitialData load(CompoundTag compound, HolderLookup.Provider provider) {
-		ListTag listTag = compound.getList("UUIDList", CompoundTag.TAG_COMPOUND);
-		List<UUID> uuidList = new ArrayList<>();
-		for (int i = 0; i < listTag.size(); ++i) {
-			CompoundTag uuidTag = listTag.getCompound(i);
-			uuidList.add(uuidTag.getUUID("UUID"));
-		}
-
-		return new InitialData(uuidList);
-	}
-
-	@Override
-	public CompoundTag save(CompoundTag compound, HolderLookup.Provider provider) {
-		ListTag listTag = new ListTag();
-		for (UUID uuid : playerList) {
-			CompoundTag uuidTag = new CompoundTag();
-			uuidTag.putUUID("UUID", uuid);
-			listTag.add(uuidTag);
-		}
-		compound.put("UUIDList", listTag);
-
-		return compound;
-	}
-
 	public static InitialData get(Level level) {
 		if (!(level instanceof ServerLevel)) {
 			throw new RuntimeException("Attempted to get the data from a client level. This is wrong.");
@@ -65,6 +53,6 @@ public class InitialData extends SavedData {
 		ServerLevel overworld = level.getServer().getLevel(Level.OVERWORLD);
 
 		DimensionDataStorage storage = overworld.getDataStorage();
-		return storage.computeIfAbsent(new SavedData.Factory<>(InitialData::new, InitialData::load), DATA_NAME);
+		return storage.computeIfAbsent(type());
 	}
 }

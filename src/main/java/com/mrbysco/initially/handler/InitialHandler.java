@@ -30,7 +30,7 @@ public class InitialHandler {
 		if (!player.level().isClientSide) {
 			CompoundTag playerData = player.getPersistentData();
 			InitialData initialData = InitialData.get(player.level());
-			if (playerData.getBoolean(initialGiven)) {
+			if (playerData.getBooleanOr(initialGiven, false)) {
 				initialData.setGiven(player.getUUID());
 				initialData.setDirty();
 				playerData.remove(initialGiven);
