@@ -18,6 +18,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedInEven
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class InitialHandler {
 	public static final List<ItemObject> itemList = new ArrayList<>();
@@ -48,8 +49,9 @@ public class InitialHandler {
 			if (!object.itemLocation().isEmpty()) {
 				ResourceLocation location = ResourceLocation.tryParse(object.itemLocation());
 				if (location == null) continue;
-				Item item = BuiltInRegistries.ITEM.get(location);
-				if (item != null) {
+				Optional<Item> optionalItem = BuiltInRegistries.ITEM.getOptional(location);
+				if (optionalItem.isPresent()) {
+					Item item = optionalItem.get();
 					Inventory inventory = player.getInventory();
 					int slot = object.slot();
 					ItemStack stack = new ItemStack(item, object.count());

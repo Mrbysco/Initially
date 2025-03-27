@@ -1,10 +1,11 @@
 package com.mrbysco.initially.config;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 
 public class ConfigReloadManager implements ResourceManagerReloadListener {
 	@Override
@@ -13,7 +14,7 @@ public class ConfigReloadManager implements ResourceManagerReloadListener {
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public void onAddReloadListeners(AddReloadListenerEvent event) {
-		event.addListener(this);
+	public void onAddReloadListeners(AddServerReloadListenersEvent event) {
+		event.addListener(ResourceLocation.fromNamespaceAndPath("initially", "config"), this);
 	}
 }
