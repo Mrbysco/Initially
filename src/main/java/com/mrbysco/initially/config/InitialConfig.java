@@ -5,6 +5,7 @@ import com.mrbysco.initially.config.object.ItemObject;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("ClassCanBeRecord")
 public final class InitialConfig {
 	private final List<ItemObject> initialList;
 

@@ -6,10 +6,11 @@ import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class ConfigReloadManager implements ResourceManagerReloadListener {
 	@Override
-	public void onResourceManagerReload(ResourceManager resourceManager) {
+	public void onResourceManagerReload(@NotNull ResourceManager resourceManager) {
 		ConfigHandler.loadInitialConfig();
 	}
 

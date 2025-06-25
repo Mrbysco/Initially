@@ -52,6 +52,7 @@ public class InitialData extends SavedData {
 		}
 		ServerLevel overworld = level.getServer().getLevel(Level.OVERWORLD);
 
+		assert overworld != null;
 		DimensionDataStorage storage = overworld.getDataStorage();
 		return storage.computeIfAbsent(type());
 	}
