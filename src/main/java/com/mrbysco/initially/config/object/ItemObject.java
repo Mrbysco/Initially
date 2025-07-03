@@ -51,6 +51,7 @@ public final class ItemObject {
 		if (obj == null || obj.getClass() != this.getClass()) return false;
 		var that = (ItemObject) obj;
 		return this.slot == that.slot &&
+				Objects.equals(this.slotName, that.slotName) &&
 				Objects.equals(this.itemLocation, that.itemLocation) &&
 				Objects.equals(this.components, that.components) &&
 				this.count == that.count;
@@ -58,13 +59,14 @@ public final class ItemObject {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(slot, itemLocation, components, count);
+		return Objects.hash(slot, slotName, itemLocation, components, count);
 	}
 
 	@Override
 	public String toString() {
 		return "ItemObject[" +
 				"slot=" + slot + ", " +
+				"slotName=" + slotName + ", " +
 				"resourceLocation=" + itemLocation + ", " +
 				"components=" + components + ", " +
 				"count=" + count + ']';

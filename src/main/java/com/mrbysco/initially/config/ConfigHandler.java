@@ -21,7 +21,8 @@ public class ConfigHandler {
 
 	public static void initializeConfig() {
 		if (!INITIAL_FOLDER.exists() || !INITIAL_FILE.exists()) {
-			INITIAL_FOLDER.mkdirs();
+			if (!INITIAL_FOLDER.mkdirs())
+				Initially.LOGGER.error("Failed to create the config folder: {}", INITIAL_FOLDER.getAbsolutePath());
 
 			List<ItemObject> items = new ArrayList<>(41);
 			items.add(new ItemObject(40, "offhand", "", "", 1));
