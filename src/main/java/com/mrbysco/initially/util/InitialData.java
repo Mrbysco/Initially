@@ -19,7 +19,7 @@ public class InitialData extends SavedData {
 	private static final String DATA_NAME = Initially.MOD_ID + "_world_data";
 	public static final Codec<InitialData> CODEC = RecordCodecBuilder.create(
 			instance -> instance.group(
-							UUIDUtil.CODEC.listOf().fieldOf("UUIDList").forGetter(data -> data.playerList)
+							UUIDUtil.STRING_CODEC.listOf().fieldOf("UUIDList").forGetter(data -> data.playerList)
 					)
 					.apply(instance, InitialData::new)
 	);
