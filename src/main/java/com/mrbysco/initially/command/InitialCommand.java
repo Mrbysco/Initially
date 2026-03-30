@@ -16,7 +16,7 @@ import net.minecraft.server.level.ServerPlayer;
 public class InitialCommand {
 	public static void initializeCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
 		final LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("initially");
-		root.requires((sourceStack) -> sourceStack.hasPermission(2))
+		root.requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
 				.then(Commands.literal("give").then(Commands.argument("player", EntityArgument.players()).executes(InitialCommand::giveInitial)));
 		dispatcher.register(root);
 	}

@@ -7,7 +7,7 @@ import com.mrbysco.initially.util.InitialData;
 import net.minecraft.commands.arguments.item.ItemParser;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -47,7 +47,7 @@ public class InitialHandler {
 	public static void giveInitially(Player player) {
 		for (ItemObject object : itemList) {
 			if (!object.itemLocation().isEmpty()) {
-				ResourceLocation location = ResourceLocation.tryParse(object.itemLocation());
+				Identifier location = Identifier.tryParse(object.itemLocation());
 				if (location == null) continue;
 				Optional<Item> optionalItem = BuiltInRegistries.ITEM.getOptional(location);
 				if (optionalItem.isPresent()) {
