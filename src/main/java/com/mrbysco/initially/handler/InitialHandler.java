@@ -4,6 +4,7 @@ import com.mojang.brigadier.StringReader;
 import com.mrbysco.initially.Initially;
 import com.mrbysco.initially.config.object.ItemObject;
 import com.mrbysco.initially.util.InitialData;
+import net.minecraft.commands.arguments.item.ItemInput;
 import net.minecraft.commands.arguments.item.ItemParser;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -58,7 +59,7 @@ public class InitialHandler {
 					if (!object.components().isEmpty()) {
 						ItemParser parser = new ItemParser(player.level().registryAccess());
 						try {
-							ItemParser.ItemResult result = parser.parse(new StringReader(object.itemLocation() + object.components()));
+							ItemInput result = parser.parse(new StringReader(object.itemLocation() + object.components()));
 							//Have to add the item location so that the parser doesn't throw an error
 							stack.applyComponents(result.components());
 						} catch (Exception e) {

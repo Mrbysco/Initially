@@ -4,19 +4,20 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.mrbysco.initially.Initially;
 import net.minecraft.core.UUIDUtil;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
-import net.minecraft.world.level.storage.DimensionDataStorage;
+import net.minecraft.world.level.storage.SavedDataStorage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class InitialData extends SavedData {
-	private static final String DATA_NAME = Initially.MOD_ID + "_world_data";
+	private static final Identifier DATA_ID = Identifier.fromNamespaceAndPath(Initially.MOD_ID, "initial_data");
 	public static final Codec<InitialData> CODEC = RecordCodecBuilder.create(
 			instance -> instance.group(
 							UUIDUtil.STRING_CODEC.listOf().fieldOf("UUIDList").forGetter(data -> data.playerList)
@@ -35,7 +36,7 @@ public class InitialData extends SavedData {
 	}
 
 	public static SavedDataType<InitialData> type() {
-		return new SavedDataType<>(DATA_NAME, InitialData::new, CODEC, DataFixTypes.SAVED_DATA_COMMAND_STORAGE);
+		return new SavedDataType<>(DATA_ID, InitialData::new, CODEC, DataFixTypes.SAVED_DATA_COMMAND_STORAGE);
 	}
 
 	public boolean hasBeenGiven(UUID uuid) {
@@ -53,7 +54,7 @@ public class InitialData extends SavedData {
 		ServerLevel overworld = level.getServer().getLevel(Level.OVERWORLD);
 
 		assert overworld != null;
-		DimensionDataStorage storage = overworld.getDataStorage();
+		SavedDataStorage storage = overworld.getDataStorage();
 		return storage.computeIfAbsent(type());
 	}
 }
